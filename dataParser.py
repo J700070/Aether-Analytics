@@ -1,4 +1,4 @@
-from connect import connect
+from database import countIndustries
 import numpy as np
 
 def getStock(ticker):

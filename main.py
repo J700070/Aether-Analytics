@@ -1,20 +1,22 @@
 from dataParser import getStock
+from database import countIndustries
 from matplotlib import pyplot as plt
 import numpy as np
 
-#Get Stock
-stock = getStock('AAPL')
+def industriesChart():
+    labels, sizes = countIndustries()
+
+    sizes, labels = zip(*sorted(zip(sizes,labels)))
+
+    x = np.arange(len(labels))
+    width=0.8
+
+    plt.bar(labels, sizes)
+    plt.xticks(rotation = 90)
+    plt.yscale('log')
+    plt.show()
 
 
-width = 0.8
-x_pos = np.arange(len(stock["dates"]))
-print(x_pos)
-#fig, ax = plt.subplots()
 
-#ax.bar(stock["dates"],stock["revenue"], width, color= "#003f5c")  
-plt.bar(x_pos, stock["revenue"])
-plt.xticks(x_pos, stock["dates"], color='black', rotation=45)
-""" plt.set_title(stock["ticker"] + " revenues")
-plt.set_ylabel("Revenue (millions)")
-plt.set_xlabel("Period") """
-plt.show()
+if __name__ == '__main__':
+    industriesChart()
